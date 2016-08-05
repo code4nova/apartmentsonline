@@ -1,0 +1,60 @@
+{% load humanize %}
+<div class="container">
+<div class="row">
+<div class="col-sm-12 main">
+<div class="table-responsive">
+<table class="table table-striped">
+<thead>
+    <tr>
+      <th>Property Name</th>
+      <th>Owned By</th>
+      <th>Managed By</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>BR</th>
+      <th>Minimum Income/</th>
+      <th>Maximum Income</th>
+      <th>Rent</th>
+    </tr>
+</thead>
+<tbody>
+{% for apartment in apartments %}
+<tr>
+  <td>
+  {{apartment}}
+  </td>
+  <td>
+  {{apartment.owned_by}}
+  </td>
+  <td>
+  {{apartment.managed_by}}
+  </td>
+  <td>
+  {{apartment.address}}
+  </td>
+  <td>
+  {{apartment.phone_contact}}
+  </td>
+  <td>
+  {{apartment.number_of_bedrooms}}BR
+  </td>
+  <td>
+  ${{apartment.minimum_income|intcomma}}/{{apartment.income_divisor}}
+  </td>
+  <td>
+  ${{apartment.maximum_income|intcomma}}/{{apartment.income_divisor}}
+  </td>
+  <td>
+  ${{apartment.rent|intcomma}}
+  </td>
+</tr>
+{% endfor %}
+<tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- <div class="row">
+<div class="col-sm-3 col-offset-9"><button class="btn btn-primary" type="button" onclick="location.href='/apartments/create/'">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Apartment</button></div>
+</div> -->
+</div>

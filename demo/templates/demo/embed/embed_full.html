@@ -1,0 +1,16 @@
+{% extends "demo/main.html" %}
+{% block extra_head %}
+<style>
+body {
+    background-color: transparent;
+}
+.table-striped>thead,
+.table-striped>tbody>tr:nth-child(even)>td,
+.table-striped>tbody>tr:nth-child(even)>th {
+	background-color: white;
+}
+</style>
+{% endblock %}
+{% block content %}
+{% include "demo/embed/embed.html" %}
+{% endblock %}

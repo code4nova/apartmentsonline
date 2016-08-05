@@ -1,0 +1,12 @@
+{% extends "demo/main.html" %}
+{% load addcss %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+<form action="/apartments/create/" method="post">
+    {% crispy form %}
+    <input type="submit" value="Submit" class="btn btn-primary"/>
+</form>
+</div>
+
+{% endblock %}

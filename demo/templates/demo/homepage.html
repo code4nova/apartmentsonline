@@ -1,0 +1,16 @@
+{% extends 'demo/main.html' %}
+{% load humanize %}
+{% block content %}
+<div class="container">
+<div class="row">
+<div class="col-sm-12"><h1> Arlington Affordable Housing Online: Available Units</h1>
+</div>
+</div>
+<div class="row">
+{% include "demo/embed/embed.html" %}
+</div>
+<div class="row">
+<div class="col-sm-3 col-offset-9"><button class="btn btn-primary" type="button" onclick="location.href='/apartments/create/'">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Apartment</button></div>
+</div>
+</div>
+{% endblock %}
