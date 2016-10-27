@@ -20,7 +20,7 @@
 	        {{ form }}
 	{% endfor %}
 {% else %}
-    {{ wizard.form }}
+    {% crispy wizard.form %}
 {% endif %}
 </table>
 {% if wizard.steps.prev %}
