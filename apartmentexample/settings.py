@@ -39,10 +39,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'crispy_forms',
+    'formtools',
     'demo',
 )
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

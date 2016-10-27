@@ -3,7 +3,7 @@ from django.shortcuts import render
 from .models import Apartment
 from .forms import ApartmentForm
 from django.views.decorators.clickjacking import xframe_options_exempt
-
+from formtools.wizard.views import CookieWizardView
 
 def homepage(request):
     apartments = Apartment.objects.all()
@@ -26,3 +26,15 @@ class  ApartmentCreate(CreateView):
     form_class = ApartmentForm
     template_name = "demo/apartment_form.html"
     success_url = "/"
+
+class ApartmentWizard(CookieWizardView):
+    template_name = "demo/apartment_wizard.html"
+    def done(self, form_list, **kwargs):
+
+        instance = Apartment()
+
+        for form in form_list:
+            for key, value in form.cleaned_data.iteritems():
+                setattr(instance, key, value)
+        instance.save()
+	return render(self.request, 'demo/homepage.html', {'apartments': Apartment.objects.all()})
