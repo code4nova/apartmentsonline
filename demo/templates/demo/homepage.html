@@ -1,5 +1,6 @@
 {% extends 'demo/main.html' %}
 {% load humanize %}
+{% load has_group %}
 {% block content %}
 <div class="container">
 <div class="row">
@@ -10,7 +11,9 @@
 {% include "demo/embed/embed.html" %}
 </div>
 <div class="row">
+{% if request.user.is_staff or request.user|has_group:"Site Manager" %}
 <div class="col-sm-3 col-offset-9"><button class="btn btn-primary" type="button" onclick="location.href='/apartments/wizard/'">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Apartment</button></div>
+{% endif %}
 </div>
 </div>
 {% endblock %}
