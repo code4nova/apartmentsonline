@@ -36,7 +36,11 @@ class AptWiz_1(forms.ModelForm):
 class AptWiz_2(forms.ModelForm):
     class Meta:
         model = Apartment
-	fields = ["number_of_bedrooms","max_occupants"]
+        num_bedchoices = ((0,"Studio"),(1,"One Bedroom"), (2, "Two Bedroom"), (3,"Three Bedroom"))
+        num_occupantchoices = ((1,"One"), (2, "Two"), (3,"Three"),(4,"Four"),(5, "Five"))
+        widgets = {'number_of_bedrooms': forms.Select(choices=num_bedchoices),
+                   'max_occupants': forms.Select(choices=num_occupantchoices)}
+        fields = ["number_of_bedrooms","max_occupants"]
 
 class AptWiz_3(forms.ModelForm):
     def __init__(self, *args, **kwargs):
