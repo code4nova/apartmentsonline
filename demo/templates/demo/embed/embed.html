@@ -1,4 +1,5 @@
 {% load humanize %}
+{{perms.demo}}
 <div class="container">
 <div class="row">
 <div class="col-sm-12 main">
@@ -12,7 +13,7 @@
       <th>Address</th>
       <th>Phone</th>
       <th>BR</th>
-      <th>Minimum Income/</th>
+      <th>Minimum Income</th>
       <th>Maximum Income</th>
       <th>Rent</th>
     </tr>
@@ -24,28 +25,37 @@
   {{apartment}}
   </td>
   <td>
-  {{apartment.owned_by}}
+  {{apartment.building.apartment_complex.owner}}
   </td>
   <td>
-  {{apartment.managed_by}}
+  {{apartment.building.apartment_complex.manager}}
   </td>
   <td>
-  {{apartment.address}}
+  {{apartment.building.street_address}}
   </td>
   <td>
-  {{apartment.phone_contact}}
+  {{apartment.contact.phone}}
   </td>
   <td>
+  {% if apartment.number_of_bedrooms == 0 %}
+  Studio
+   {% else %}
   {{apartment.number_of_bedrooms}}BR
+   {% endif %}
   </td>
   <td>
-  ${{apartment.minimum_income|intcomma}}/{{apartment.income_divisor}}
+  ${{apartment.minimum_income|intcomma}}
   </td>
   <td>
-  ${{apartment.maximum_income|intcomma}}/{{apartment.income_divisor}}
+  ${{apartment.maximum_income|intcomma}}
   </td>
   <td>
   ${{apartment.rent|intcomma}}
+  </td>
+  <td>
+  {% if request.user.is_authenticated and request.user.apartmentcomplexuser.apartment_complex == apartment.building.apartment_complex and perms.demo.delete_apartment %}
+  <button class="btn btn-danger"> Delete </button>
+  {% endif %}
   </td>
 </tr>
 {% endfor %}

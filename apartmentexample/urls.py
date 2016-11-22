@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.auth.views import login, logout
 from demo import views
 from demo.forms import AptWiz_1, AptWiz_2, AptWiz_3, AptWiz_4
 urlpatterns = [
     url(r'^$', views.homepage, name="embed"),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^embed/', views.embed, name="embed"),
+    url(r'^login/$', login, name="login"),
+    url(r'^logout/$', logout,{'next_page': '/'}),
     url(r'^apartments/create/', views.ApartmentCreate.as_view()),
-    url(r'^apartments/wizard/', views.ApartmentWizard.as_view([AptWiz_1, AptWiz_2, AptWiz_3, AptWiz_4])),
+    url(r'^apartments/wizard/', lambda request: views.ApartmentWizard.as_view([AptWiz_1, AptWiz_2, AptWiz_3, AptWiz_4],user=request.user)(request)),
 ]

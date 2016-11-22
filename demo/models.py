@@ -5,12 +5,14 @@ from django.contrib.auth.models import User
 phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
 
 # Base permissions unit, all permissions currently derive from complex
-class ApartmentComplex(model.Model):
+class ApartmentComplex(models.Model):
     name = models.CharField(max_length=100)
     owner = models.CharField(max_length=100)
     manager = models.CharField(max_length=100)
     def __str__(self):
         return self.name
+    class Meta:
+        verbose_name_plural = "apartment complexes"
 
 # A point of contact for a particular complex
 class ApartmentContact(models.Model):
@@ -21,14 +23,14 @@ class ApartmentContact(models.Model):
     class Meta:
         unique_together = (("phone","apartment_complex"))
     def __str__(self):
-        return "%s (%s)" % (name, phone)
+        return "%s %s (%s)" % (self.first_name, self.last_name, self.phone)
 
 # Attachment for user model, it's basically just a pro
 class ApartmentComplexUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     apartment_complex = models.ForeignKey(ApartmentComplex)
     def __str__(self):
-        return "%s (%s)" % (name, phone)
+        return "%s %s (%s)" % (self.user.first_name,self.user.last_name, self.apartment_complex)
 
 class ApartmentBuilding(models.Model):
     name = models.CharField(max_length=75)
@@ -38,7 +40,7 @@ class ApartmentBuilding(models.Model):
     class Meta:
         unique_together = (("name","apartment_complex"))
     def __str__(self):
-        return "%s (%s)" % (name, street_address)
+        return "%s (%s)" % (self.name, self.street_address)
 
 class Apartment(models.Model):
     quality_choices = (
@@ -60,4 +62,4 @@ class Apartment(models.Model):
     class Meta:
         unique_together = (("building","suite_number"))
     def __str__(self):
-        return "Unit %s - %s" % (suite_number, building.name)
+        return "Unit %s - %s" % (self.suite_number, self.building.name)

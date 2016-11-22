@@ -29,6 +29,15 @@ class  ApartmentCreate(CreateView):
 
 class ApartmentWizard(CookieWizardView):
     template_name = "demo/apartment_wizard.html"
+    user = None
+    def __init__(self,*args,**kwargs):
+        super(ApartmentWizard, self).__init__(*args, **kwargs)
+        self.user = kwargs["user"]
+    def get_form_kwargs(self, step, *args, **kwargs):
+        kwargs = super(ApartmentWizard, self).get_form_kwargs(step, *args, **kwargs)
+        if step == "0":
+            kwargs['user'] = self.user
+        return kwargs
     def done(self, form_list, **kwargs):
 
         instance = Apartment()

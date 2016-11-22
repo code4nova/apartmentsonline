@@ -3,6 +3,7 @@
 {% load has_group %}
 {% block content %}
 <div class="container">
+<div class="row"> {% if request.user.is_authenticated %}<div class="text-right">Assigned to {{request.user.apartmentcomplexuser.apartment_complex}} (<a href="/logout/">Logout</a>)</div>{% endif %}</div>
 <div class="row">
 <div class="col-sm-12"><h1> Arlington Affordable Housing Online: Available Units</h1>
 </div>
@@ -11,8 +12,14 @@
 {% include "demo/embed/embed.html" %}
 </div>
 <div class="row">
-{% if request.user.is_staff or request.user|has_group:"Site Manager" %}
+{% if request.user.is_authenticated and perms.demo.add_apartment %}
 <div class="col-sm-3 col-offset-9"><button class="btn btn-primary" type="button" onclick="location.href='/apartments/wizard/'">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Apartment</button></div>
+{% endif %}
+{% if request.user.is_authenticated and perms.demo.add_apartmentbuilding %}
+<div class="col-sm-3 col-offset-9"><button class="btn btn-primary" type="button" onclick="location.href='/apartments/wizard/'">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Apartment Building</button></div>
+{% endif %}
+{% if request.user.is_authenticated and perms.demo.add_apartmentcontact %}
+<div class="col-sm-3 col-offset-9"><button class="btn btn-primary" type="button" onclick="location.href='/apartments/wizard/'">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Apartment Contact</button></div>
 {% endif %}
 </div>
 </div>
