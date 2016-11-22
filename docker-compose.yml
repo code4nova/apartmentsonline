@@ -6,6 +6,6 @@ web:
   volumes:
     - .:/code
   ports:
-    - "80:8000"
+    - "8000:8000"
   links:
     - db

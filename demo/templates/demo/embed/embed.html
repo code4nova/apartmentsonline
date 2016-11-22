@@ -1,5 +1,4 @@
 {% load humanize %}
-{{perms.demo}}
 <div class="container">
 <div class="row">
 <div class="col-sm-12 main">
@@ -54,7 +53,7 @@
   </td>
   <td>
   {% if request.user.is_authenticated and request.user.apartmentcomplexuser.apartment_complex == apartment.building.apartment_complex and perms.demo.delete_apartment %}
-  <button class="btn btn-danger"> Delete </button>
+  <button class="btn btn-danger" onclick="location.href='/apartments/delete/{{apartment.pk}}'">Delete</button>
   {% endif %}
   </td>
 </tr>
