@@ -26,7 +26,7 @@ SECRET_KEY = '8-n%f3ce*nd02yfrxest&p8s840jj4rxv70n@0mg(037=)5(av'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+LOGIN_REDIRECT_URL = "/"
 
 # Application definition
 
@@ -105,7 +105,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+LOGIN_URL = '/login/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
